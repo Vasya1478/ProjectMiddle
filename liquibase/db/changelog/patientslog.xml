@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
+    http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd ">
+
+    <changeSet id="20201025-6" author="kapitanov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="patients" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Create table patients</comment>
+
+        <sql>
+            create table patients
+            (
+            id serial,
+            idd int not null unique,
+            card_number int unique,
+            name varchar(20),
+            age int,
+            address varchar(50),
+            insurance_number varchar(10),
+            phone_number varchar(11),
+            create_date timestamp(0),
+            delete_date timestamp(0),
+            constraint PK_patients_id primary key(id)
+            );
+            insert into patients(idd, card_number, name, age, address, insurance_number, phone_number)
+            values(1, 149, 'Ñîêîëîâ Ê.Ñ.', 25, 'Êàëèíèíà 34-43', 1000000000, 89000000000);
+            insert into patients(idd, card_number, name, age, address, insurance_number, phone_number)
+            values(2, 150, 'ßêîâëåâ Í.Í.', 29, 'Ìàÿêîâñêîãî 15-78', 1000000001, 89000000001);
+            insert into patients(idd, card_number, name, age, address, insurance_number, phone_number)
+            values(3, 151, 'Ïàâëîâ Â.Ã.', 45, 'Êðèñàíîâà 34-98', 1000000002, 89000000002);
+            insert into patients(idd, card_number, name, age, address, insurance_number, phone_number)
+            values(4, 148, 'Íèêàíîðîâ È.Ä.', 35, 'Åêàòåðèíèíñêàÿ 12-12', 1000000003, 89000000003);
+            insert into patients(idd, card_number, name, age, address, insurance_number, phone_number)
+            values(5, 147, 'Ãóñåâ Í.Å.', 28, 'Îñòðîâñêîãî 66-44', 1000000004, 89000000004);
+            insert into patients(idd, card_number, name, age, address, insurance_number, phone_number)
+            values(6, 146, 'Ñìèðíîâ Â.Ð.', 28, 'Ëóíà÷àðñêîãî 21-98', 1000000005, 89000000005);
+            insert into patients(idd, card_number, name, age, address, insurance_number, phone_number)
+            values(7, 145, 'Ìèðîíîâ Ì.Ë.', 19, 'Ïóøêèíà 87-94', 1000000006, 89000000006);
+            insert into patients(idd, card_number, name, age, address, insurance_number, phone_number)
+            values(8, 144, 'Çàéöåâ À.Î.', 70, 'Äçåðæèíñêîãî 43-12', 1000000007, 89000000007);
+            insert into patients(idd, card_number, name, age, address, insurance_number, phone_number)
+            values(9, 143, 'Êîâàëåâ Â.Â.', 56, 'Òàíêèñòîâ 45-63', 1000000008, 89000000008);
+            insert into patients(idd, card_number, name, age, address, insurance_number, phone_number)
+            values(10, 142, 'Ìåäâåäåâ À.Í.', 37, 'Ø.Êîñìîíàâòîâ 120-32', 1000000009, 89000000009);
+            insert into patients(idd, card_number, name, age, address, insurance_number, phone_number)
+            values(11, 141, 'Ôðîëîâ Ã.Ã.', 23, 'Óðàëüñêàÿ 70-65', 1000000010, 89000000010);
+            insert into patients(idd, card_number, name, age, address, insurance_number, phone_number)
+            values(12, 140, 'Âèíîãðàäîâ Ï.Ä.', 25, 'Ãðèáîåäîâà 13-23', 1000000011, 89000000011);
+            insert into patients(idd, card_number, name, age, address, insurance_number, phone_number)
+            values(13, 152, 'Äàíèëîâ Â.Á.', 44, 'Ðåâîëþöèè 5-13', 1000000012, 89000000012);
+            insert into patients(idd, card_number, name, age, address, insurance_number, phone_number)
+            values(14, 153, 'Ìåëüíèêîâ Â.Ð.', 31, 'Ïëåõàíîâà 51-14', 1000000013, 89000000013);
+            insert into patients(idd, card_number, name, age, address, insurance_number, phone_number)
+            values(15, 154, 'òèìîôååâ À.Ê.', 20, 'Êîìñîìîëüñêàÿ 23-75', 1000000014, 89000000014);
+        </sql>
+        <rollback>
+            <sql>
+                drop table patients;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

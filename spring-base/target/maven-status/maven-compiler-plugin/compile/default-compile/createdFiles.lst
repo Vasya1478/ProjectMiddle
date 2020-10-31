@@ -1,0 +1,11 @@
+org\example\spring\tutorial\mapping\BaseMapping.class
+org\example\spring\tutorial\generate\JooqBs.class
+org\example\spring\tutorial\dao\BaseListDao.class
+org\example\spring\tutorial\service\BaseService.class
+org\example\spring\tutorial\controller\BaseController.class
+org\example\spring\tutorial\dto\BaseHistoryDto.class
+org\example\spring\tutorial\dto\Page.class
+org\example\spring\tutorial\dao\BaseDao.class
+org\example\spring\tutorial\dto\BaseListDto.class
+org\example\spring\tutorial\dto\PageParams.class
+org\example\spring\tutorial\dto\BaseDto.class

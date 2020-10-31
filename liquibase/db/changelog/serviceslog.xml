@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
+    http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd ">
+
+    <changeSet id="20201025-5" author="kapitanov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="services" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Create table services</comment>
+
+        <sql>
+            create table services
+            (
+            id serial,
+            idd int not null unique,
+            number int unique not null,
+            service_name varchar(100),
+            type_of_service_id int,
+            price varchar(20),
+            discount int,
+            create_date timestamp(0),
+            delete_date timestamp(0),
+            constraint PK_services_id primary key(id),
+            constraint FK_services_name_of_service foreign key(type_of_service_id)
+            references name_of_service(idd)
+            );
+            insert into services(idd, number, service_name, type_of_service_id, price, discount)
+            values(1, 1, 'Ëå÷åíèå îäíîêîðíåâîãî ïóëüïèòà', 1, 1250, 3);
+            insert into services(idd, number, service_name, type_of_service_id, price, discount)
+            values(2, 2, 'Ëå÷åíèå äâóõêîðíåâîãî ïóëüïèòà', 1, 1650, 1);
+            insert into services(idd, number, service_name, type_of_service_id, price, discount)
+            values(3, 3, 'Ëå÷åíèå òðåõêîðíåâîãî ïóëüïèòà', 1, 2000, 0);
+            insert into services(idd, number, service_name, type_of_service_id, price, discount)
+            values(4, 4, 'Ëå÷åíèå êàðèåñà', 1, 500, 5);
+            insert into services(idd, number, service_name, type_of_service_id, price, discount)
+            values(5, 5, 'Ñâåòîïîëèìåðíàÿ êîìïîçèòíàÿ ïëîìáà', 1, 350, 0);
+            insert into services(idd, number, service_name, type_of_service_id, price, discount)
+            values(6, 6, 'Ëå÷åíèå ïåðèîäîíòèòà', 1, 1500, 5);
+            insert into services(idd, number, service_name, type_of_service_id, price, discount)
+            values(7, 7, 'Óäàëåíèå çóáíîãî êàìíÿ', 2, 60, 0);
+            insert into services(idd, number, service_name, type_of_service_id, price, discount)
+            values(8, 8, '×èñòêà âñåõ çóáîâ îäíîé ÷åëþñòè', 2, 800, 0);
+            insert into services(idd, number, service_name, type_of_service_id, price, discount)
+            values(9, 9, 'Ïðîôåññèîíàëüíîå îòáåëèâàíèå', 2, 300, 3);
+            insert into services(idd, number, service_name, type_of_service_id, price, discount)
+            values(10, 10, 'Óäàëåíèå çóáà', 2, 150, 0);
+        </sql>
+        <rollback>
+            <sql>
+                drop table services;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

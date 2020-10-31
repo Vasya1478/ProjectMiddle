@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
+    http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd ">
+
+    <changeSet id="20201025-4" author="kapitanov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="doctors" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Create table doctors</comment>
+
+        <sql>
+            create table doctors
+            (
+            id serial,
+            idd int not null unique,
+            employee_code int unique,
+            name varchar(20),
+            position_id int,
+            cabinet_number int,
+            time_of_receipt_id int,
+            type_of_service_id int,
+            create_date timestamp(0),
+            delete_date timestamp(0),
+            constraint PK_doctors_id primary key(id),
+            constraint FK_doctors_name_of_position foreign key(position_id)
+            references name_of_position(idd),
+            constraint FK_doctors_schedule foreign key(time_of_receipt_id)
+            references schedule(idd),
+            constraint FK_doctors_name_of_service foreign key(type_of_service_id)
+            references name_of_service(idd)
+            );
+            insert into doctors(idd, employee_code, name, position_id, cabinet_number,time_of_receipt_id, type_of_service_id)
+            values(1, 100, 'Âàëèóëëèí Ä.Ê.', 2, 101,2, 3);
+            insert into doctors(idd, employee_code, name, position_id, cabinet_number, time_of_receipt_id, type_of_service_id)
+            values(2, 101, 'Ãàëèìÿíîâà Î.À.', 3, 102, 1, 2);
+            insert into doctors(idd, employee_code, name, position_id, cabinet_number, time_of_receipt_id, type_of_service_id)
+            values(3, 102, 'Äþêèíà ß.Á.', 1, 203, 1, 1);
+            insert into doctors(idd, employee_code, name, position_id, cabinet_number, time_of_receipt_id, type_of_service_id)
+            values(4, 103, 'Åëèçàðîâà Å.Ï.', 1, 115, 1, 1);
+            insert into doctors(idd, employee_code, name, position_id, cabinet_number, time_of_receipt_id, type_of_service_id)
+            values(5, 104, 'Æóêîâ À.Å.', 1, 120, 1, 1);
+            insert into doctors(idd, employee_code, name, position_id, cabinet_number, time_of_receipt_id, type_of_service_id)
+            values(6, 105, 'Êàðáûøåâ Ã.Î.', 2, 214, 1, 3);
+            insert into doctors(idd, employee_code, name, position_id, cabinet_number, time_of_receipt_id, type_of_service_id)
+            values(7, 106, 'Ëåîíèäîâà Ì.Ð.', 1, 224, 2, 1);
+            insert into doctors(idd, employee_code, name, position_id, cabinet_number, time_of_receipt_id, type_of_service_id)
+            values(8, 107, 'Íàêèïîâ Í.Ä.', 3, 315, 1, 2);
+            insert into doctors(idd, employee_code, name, position_id, cabinet_number, time_of_receipt_id, type_of_service_id)
+            values(9, 108, 'Íèêîíåíêî Ï.Ñ.', 2, 124, 2, 3);
+        </sql>
+        <rollback>
+            <sql>
+                drop table doctors;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

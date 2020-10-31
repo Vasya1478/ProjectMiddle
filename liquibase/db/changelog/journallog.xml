@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
+    http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd ">
+
+    <changeSet id="20201025-7" author="kapitanov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="journal" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Create table journal</comment>
+
+        <sql>
+            create table journal
+            (
+            id serial,
+            idd int not null unique,
+            date_of_receipt varchar(20),
+            card_number_id int,
+            patient_name varchar(20),
+            doctor_name_id int,
+            doctor_post int,
+            service_id int,
+            quantity int,
+            create_date timestamp(0),
+            delete_date timestamp(0),
+            constraint PK_journal_id primary key(id),
+            constraint FK_journal_patient foreign key(card_number_id)
+            references patients(idd),
+            constraint FK_journal_doctors_name foreign key(doctor_name_id)
+            references doctors(idd),
+            constraint FK_journal_services foreign key(service_id)
+            references services(idd)
+            );
+        </sql>
+        <rollback>
+            <sql>
+                drop table journal;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

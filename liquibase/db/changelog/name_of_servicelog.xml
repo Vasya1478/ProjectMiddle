@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
+    http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd ">
+
+    <changeSet id="20201025-2" author="kapitanov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="name_of_service" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Create table name_of_service</comment>
+
+        <sql>
+            create table name_of_service
+            (
+            id serial,
+            idd int not null unique,
+            type_of_service varchar(50),
+            create_date timestamp(0),
+            delete_date timestamp(0),
+            constraint PK_name_of_service_id primary key(id)
+            );
+            insert into name_of_service(idd, type_of_service) values(1, 'Òåðàïåâòè÷åñêàÿ');
+            insert into name_of_service(idd, type_of_service) values(2, 'Õèðóðãè÷åñêàÿ');
+            insert into name_of_service(idd, type_of_service) values(3, 'Îðòîïåäè÷åñêàÿ');
+        </sql>
+        <rollback>
+            <sql>
+                drop table name_of_service;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

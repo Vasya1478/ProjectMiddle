@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
+    http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd ">
+    <include file="changelog/name_of_positionlog.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/name_of_servicelog.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/schedulelog.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/doctorslog.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/patientslog.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/serviceslog.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/journallog.xml" relativeToChangelogFile="true"/>
+
+<!--    <include file="changelog/userslog.xml" relativeToChangelogFile="true"/>-->
+
+
+
+
+
+
+
+
+
+</databaseChangeLog>

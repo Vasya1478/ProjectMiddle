@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
+    http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd ">
+
+    <changeSet id="20201025-1" author="kapitanov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="name_of_position" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Create table name_of_position</comment>
+
+        <sql>
+            create table name_of_position
+            (
+            id serial,
+            idd int not null unique,
+            position varchar(20),
+            salary varchar(20),
+            premium varchar(20),
+            create_date timestamp(0),
+            delete_date timestamp(0),
+            constraint PK_name_of_position_id primary key(id)
+            );
+            insert into name_of_position(idd, position, salary, premium) values(1, 'âðà÷-ñòîìàòîëîã', 27000, 2700);
+            insert into name_of_position(idd, position, salary, premium) values(2, 'îðòîïåä', 34000, 3200);
+            insert into name_of_position(idd, position, salary, premium) values(3, 'õèðóðã-òåðàïåâò', 30000, 3000);
+        </sql>
+        <rollback>
+            <sql>
+                drop table name_of_position;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
+    http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd ">
+
+    <changeSet id="20201025-3" author="kapitanov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="schedule" schemaName="public"/>
+            </not>
+        </preConditions>
+        <comment>Create table schedule</comment>
+
+        <sql>
+            create table schedule
+            (
+            id serial,
+            idd int not null unique,
+            time_of_receipt varchar(12),
+            create_date timestamp(0),
+            delete_date timestamp(0),
+            constraint PK_schedule_id primary key(id)
+            );
+            insert into schedule(idd, time_of_receipt) values(1, '08.00-12.00');
+            insert into schedule(idd, time_of_receipt) values(2, '13.00-19.00');
+        </sql>
+        <rollback>
+            <sql>
+                drop table schedule;
+            </sql>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
